@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../dist/jquery-3.3.1.min.js"></script>
+		<link href="../../css/cropper.min.css" rel="stylesheet"/>
+		<link rel="stylesheet" href="../../css/ImgCropping.css"/>
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/muiPicker.css" rel="stylesheet" />
+		<link href="../../css/muiPoppicker.css" rel="stylesheet" />
+		<title></title>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav public-bg-color">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		</header>
+			<ul class="mui-table-view" style="margin-top:45px ;">
+				<li class="mui-table-view-cell mui-media">
+					<a  id="waitao">
+						<img class="mui-media-object mui-pull-right" src="../../images/IMG_2128(20190324-000056).jpg">
+						<div class="mui-media-body">
+							 外套
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a   id="shangYi">
+						<img class="mui-media-object mui-pull-right" src="../../images/IMG_2123(20190323-235835).jpg">
+						<div class="mui-media-body">
+							上衣
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a  id="kuZi">
+						<img class="mui-media-object mui-pull-right" src="../../images/IMG_2011(20190323-235719).jpg">
+						<div class="mui-media-body">
+							裤子
+						</div>
+					</a>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a  id="qunZi">
+						<img class="mui-media-object mui-pull-right" src="../../images/IMG_2127(20190324-000044).jpg">
+						<div class="mui-media-body">
+							 裙子
+						</div>
+					</a>
+				</li>
+			</ul>
+			<script type="text/javascript">
+				document.getElementById("waitao").addEventListener("tap",function(){
+				mui.openWindow({
+						url: "laobi.html",
+						id: "laobi",
+						preload: true,
+						styles: {
+							top: '0px', //新页面顶部位置  
+							bottom: '60px',
+							 width:"100%",
+							 height:"100%",//新页面底部位置   
+							popGesture: 'hide'
+						},
+						show: {
+							autoShow: true //页面loaded事件发生后自动显示，默认为true  
+					
+						}
+					});
+				}, false);
+				document.getElementById("shangYi").addEventListener("tap",function(){
+				mui.openWindow({
+						url: "chenShan.html",
+						id: "chenShan",
+						preload: true,
+						styles: {
+							top: '0px', //新页面顶部位置  
+							bottom: '60px',
+							 width:"100%",
+							 height:"100%",//新页面底部位置   
+							popGesture: 'hide'
+						},
+						show: {
+							autoShow: true //页面loaded事件发生后自动显示，默认为true  
+					
+						}
+					});
+				}, false);
+				document.getElementById("kuZi").addEventListener("tap",function(){
+				mui.openWindow({
+						url: "kuZi.html",
+						id: "kuZi",
+						preload: true,
+						styles: {
+							top: '0px', //新页面顶部位置  
+							bottom: '60px',
+							 width:"100%",
+							 height:"100%",//新页面底部位置   
+							popGesture: 'hide'
+						},
+						show: {
+							autoShow: true //页面loaded事件发生后自动显示，默认为true  
+					
+						}
+					});
+				}, false);
+				document.getElementById("qunZi").addEventListener("tap",function(){
+				mui.openWindow({
+						url: "qunZi.html",
+						id: "qunZi",
+						preload: true,
+						styles: {
+							top: '0px', //新页面顶部位置  
+							bottom: '60px',
+							 width:"100%",
+							 height:"100%",//新页面底部位置   
+							popGesture: 'hide'
+						},
+						show: {
+							autoShow: true //页面loaded事件发生后自动显示，默认为true  
+					
+						}
+					});
+				}, false);
+		 
+			</script>
+	</body>
+</html>

@@ -1,0 +1,131 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+body{
+	width: 100%;
+	height: 100%;
+	 
+}
+a:link {
+	color: #CC163A;
+	text-decoration:none;
+	}		/* 未访问的链接 */
+a:visited {
+	color: #00FF00
+	}	/* 已访问的链接 */
+a:hover {
+	color: #FF00FF
+	}	/* 鼠标移动到链接上 */
+a:active {
+	color: #0000FF
+	}	/* 选定的链接 */
+ 
+.head {
+ 	width: 100%;
+ 	height: 25%;
+	position: absolute;
+	top: 0;
+ 
+ }
+.content{
+	height: 350px;
+	width: 100%;
+	position: absolute;
+	top: 25%;
+	 
+}
+ 
+ .login_form {
+ 	width: 70%;
+ 	height: 70%;
+ 	margin-left: 15%;
+ 	position: absolute;
+	top: 0;
+ 	border: rgb(231, 231, 231) solid 1px;
+	border-radius: 5px;
+	 
+ }
+
+ #UserName,#Password {
+ 	width: 80%;
+ 	height: 20px;
+	margin-left: 10%;
+	margin-top: 50px;
+	font-size: 14px;
+	border-radius: 5px;
+	border-style: none;
+	text-indent: 10px;
+	
+ }
+.public-icon-p,.public-icon-c{
+	position: absolute;
+	background-position: 0px 0px;
+}
+ 
+ #btns{
+ 	height: 30%;
+	width: 70%;
+	margin-left: 15%;
+ 
+	text-align: center;
+	top: 70%;
+	position: absolute;
+ }
+
+ .register_butn,.login_butn {
+ 	width: 70%;
+	height: 40%;
+ 	background-color: rgb(238,169,169);
+    margin-top: 10px;
+	font-size: 15px;
+	color: #CC163A;
+	border-radius: 10px;
+	border-style: none;
+ }
+ .register_butn {
+	 background: none;
+ }
+.foot{
+	width: 100%;
+	height: 25%;
+	position: absolute;
+	top: 75%; 
+}
+.login_icon{
+	 width: 70%;
+	 height: 50%;
+	 margin-left: 15%;
+	 position: absolute;
+	 top: 0;
+}
+.qq{
+    display: inline;
+    box-shadow: 0 1px 1px rgba(0,0,0,0,2);
+	position: absolute;
+	left: 15%;
+	margin-right: 10%;
+}
+.weixin{
+	 display: inline;
+	 box-shadow: 0 1px 1px rgba(0,0,0,0,2);
+	 margin-right: 15%;
+	 position: absolute;
+	 left: 43%;
+	}
+.weibo{
+	 display: inline;
+	 box-shadow: 0 1px 1px rgba(0,0,0,0,2);
+	 position: absolute;
+	 left: 70%;
+}
+ 
+.foot_font{
+	text-align:center;
+	width: 50%;
+	height: 50%;
+	position: absolute;
+	top:90%;
+	left: 25%;
+	
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>   
+</head>
+<body>
+	
+	<nav class="mui-bar mui-bar-tab" id="nav">
+		<a id="tab_main" class="mui-tab-item mui-active" >
+			<span class="mui-icon mui-icon-home" ></span>
+			<span class="mui-tab-label">智能管理</span>
+		</a>
+		<a id="tab_single" class="mui-tab-item">
+			<span class="mui-icon mui-icon-email"></span>
+			<span class="mui-tab-label">单品搭配</span>
+		</a>
+		<a id="tab_fashion" class="mui-tab-item">
+			<span class="mui-icon mui-icon-contact"></span>
+			<span class="mui-tab-label">潮流推荐</span>
+		</a>
+	</nav>
+	
+	<script type="text/javascript" charset="utf-8">
+      	mui.init({
+      		subpages:[//首先加载首页  
+                        {  
+                            url:'html/main.html',  
+                            id:'tab_main',  
+                            styles:{  
+                                top:'0px',  
+                                bottom:'60px'  
+                            }  
+                        }  
+                    ],  
+            preloadPages:[//预加载其他页面  
+                {  
+                    url:'html/single.html',  
+                    id:'tab_single',  
+                    styles:{
+	                top:'0px',
+	                bottom:'60px'  
+                    }  
+                },  
+                {  
+	                url:'html/fashion.html',  
+	                id:'tab_fashion',  
+	                styles:{  
+	                    top:'0px',  
+	                    bottom:'60px'  
+	                }  
+                }
+            ] 
+      	});
+      	mui.plusReady(function(){
+      		var tab_main,tab_single,tab_fashion  
+                mui("#nav").on("tap","#tab_main",function(){//点击触发   
+                    tab_main=plus.webview.getWebviewById("tab_main");  
+                    tab_main.show();
+                    tab_single.hide();
+                    tab_fashion.hide();
+                })  
+                mui("#nav").on("tap","#tab_single",function(){//点击触发  
+                    tab_single=plus.webview.getWebviewById("tab_single");  
+                    tab_single.show();     
+                })  
+                mui("#nav").on("tap","#tab_fashion",function(){//点击触发  
+                    tab_fashion=plus.webview.getWebviewById("tab_fashion");  
+                    tab_fashion.show();  
+                })  
+      	})
+      	
+    </script>
+	
+</body>
+</html>

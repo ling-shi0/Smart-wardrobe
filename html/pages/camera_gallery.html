@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-object {
+				height: 150px;
+			}
+			
+			.mui-grid-view.mui-grid-9 .mui-media .mui-icon {
+				position: absolute;
+				right: 15px;
+				top: 15px;
+				z-index: 1;
+				color: yellow;
+			}
+			
+			#sure_img {
+				margin-top: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-pull-right" id="sure_img">确定</a>
+			<h1 class="mui-title">相机相册</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-grid-view mui-grid-9">
+				<!--<li class="mui-table-view-cell mui-media mui-col-xs-6">
+					<img class="mui-media-object" src="../../img/shuijiao.jpg">
+					<span class="mui-icon mui-icon-star-filled"></span>
+				</li>-->
+			</ul>
+		</div>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/mui.lazyload.js"></script>
+		<script src="../../js/mui.lazyload.img.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			mui.plusReady(function() {
+				var currentNode = null; //当前选中的元素节点对象
+				var targetImage = ""; //选中的图片路径
+				/**
+				 * 获取当前窗口对象
+				 * http://www.html5plus.org/doc/zh_cn/webview.html#plus.webview.currentWebview
+				 */
+				var self = plus.webview.currentWebview();
+				var imgArr = self.imgArr;
+				/**
+				 * 动态拼接，图文表格；
+				 * http://dcloud.io/hellomui/examples/slider-table-default.html
+				 * 使用懒加载；
+				 * http://dcloud.io/hellomui/examples/lazyload-image.html
+				 */
+				/**
+				 * 懒加载比较关键的三个点：
+				 * 1、引入mui.lazyload.js以及mui.lazyload.img.js文件；
+				 * 2、img标签中使用data-lazyload来存储实际要展示的图片路径；
+				 * 3、用mui选择器获取文档节点，进行懒加载初始化操作；
+				 */
+				var html = "";
+				for(var i = 0, len = imgArr.length; i < len; i++) {
+					html += '<li class="mui-table-view-cell mui-media mui-col-xs-6">' +
+						'<img class="mui-media-object" data-lazyload="' + imgArr[i] + '" /></li>';
+				}
+				// 拼接目标节点的内容
+				document.querySelector(".mui-table-view").innerHTML = html;
+				// 懒加载初始化
+				mui(document).imageLazyload({
+					placeholder: "img/text.png"
+				});
+				/**
+				 * 添加选择图片事件
+				 */
+				mui(".mui-table-view").on("tap", ".mui-table-view-cell", function() {
+					// 第一步，替换选中图片路径
+					targetImage = this.querySelector(".mui-media-object").src;
+					// 第二步，判断是否已经有图片被选中；若有，则移除之前的星星，因为此例子仅做单选；
+					if(currentNode) {
+						currentNode.removeChild(currentNode.querySelector("span"));
+					}
+					// 第三步，创建一个span元素节点，在图片右上角添加一个黄色的填充星星；
+					var spanNode = document.createElement("span");
+					spanNode.classList.add("mui-icon");
+					spanNode.classList.add("mui-icon-star-filled");
+					this.appendChild(spanNode);
+					// 第四步，替换当前被选中节点对象；
+					currentNode = this;
+				});
+				// 确定选择的图片
+				document.getElementById("sure_img").addEventListener("tap", function() {
+					if(targetImage) {
+						/**
+						 * 获取当前窗口的创建者
+						 * http://www.html5plus.org/doc/zh_cn/webview.html#plus.webview.WebviewObject.opener
+						 */
+						var opener = self.opener();
+						/**
+						 * 触发目标窗口对象的事件，替换图片；
+						 * http://dev.dcloud.net.cn/mui/event/#customevent
+						 */
+						mui.fire(opener, "change_image", {
+							imgUrl: targetImage
+						});
+						// 返回上一页
+						mui.back();
+					} else {
+						mui.toast("请选择图片");
+					}
+				});
+			});
+		</script>
+	</body>
+
+</html>

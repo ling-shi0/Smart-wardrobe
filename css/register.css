@@ -1,0 +1,25 @@
+ body{
+	 width: 100%;
+	 height: 100%;
+ }
+ .public-bg-color{
+	 background-color: rgb(134,166,151);
+ }
+ .register_form{
+	 width: 100%;
+	 height: 50%;
+	 position: absolute;
+	 top: 70px;
+ }
+ .btn_idt{
+	 position: absolute;
+	 top: 66px;
+	 margin-left: 76%; 
+	 height: 40px;
+ }
+ .btn_rg{
+	 width: 100%;
+ }
+ .public-bg-color a{
+	 color: rgb(100,106,88);
+ }

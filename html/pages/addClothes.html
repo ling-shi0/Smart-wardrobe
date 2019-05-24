@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../dist/jquery-3.3.1.min.js"></script>
+		<link href="../../css/cropper.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/ImgCropping.css" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link href="../../css/muiPicker.css" rel="stylesheet" />
+		<link href="../../css/muiPoppicker.css" rel="stylesheet" />
+		<style>
+			#picture {
+				height: 200px;
+				border: #007AFF solid 1px;
+			}
+			#picture:hover {
+				border: #C71F7E solid 1px;
+				background: rgba(0, 0, 0, 0.1);
+			}
+			#ad {
+				margin-top: 75px;
+			}
+			#colorBox{
+				display: -webkit-flex; /* Safari */
+				display: flex;
+				align-items: stretch;
+				justify-content:center;
+				flex-direction: row;
+				flex-wrap: wrap;
+			}
+			.box{
+				margin: 5px 10px;
+			}			
+		</style>
+		<script type="text/javascript">
+			var sourceSrc = "";
+		</script>
+	</head>
+	<body>
+		<header id="header" class="mui-bar mui-bar-nav public-bg-color">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">单品搭配</h1>
+		</header>
+		<a id="tttt"></a>
+		<div class="mui-content">
+			<div class="mui-content-padded" id="picture">
+				<p class="mui-text-center" id="tuPian" style="display: none;"><img src="" id="resultPicture" style="width: calc();height: 180px;">
+				</p>
+				<p class="mui-text-center" id="ad"><span class="mui-icon mui-icon-plus" style="font-size: 50px;"></span></p>
+			</div>
+			<div class="mui-card">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-collapse">
+						<a class="mui-navigate-right">分类<p id="resultOfType"></p></a>
+						<div class="mui-content">
+							<ul class="mui-table-view">
+								<li class="mui-table-view-cell mui-collapse">
+									<a id="coatPicker">外套</a>
+								</li>
+								<li class="mui-table-view-cell mui-collapse">
+									<a id="upPicker">上衣</a>
+								</li>
+								<li class="mui-table-view-cell mui-collapse">
+									<a id="downPicker">裤子</a>
+								</li>
+								<li class="mui-table-view-cell mui-collapse">
+									<a id="qunPicker">裙子</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a>颜色</a>
+						<div class="mui-collapse-content" id="colorBox">
+							<div class="box" id="0" style="width: 50px;height: 50px;background: #000000;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="1" style="width: 50px;height: 50px;background: #FFFFFF;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="2" style="width: 50px;height: 50px;background: #497568;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="3" style="width: 50px;height: 50px;background: #8CC269;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="4" style="width: 50px;height: 50px;background: #134857;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="5" style="width: 50px;height: 50px;background: #93D5DC;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="6" style="width: 50px;height: 50px;background: #74759B;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="7" style="width: 50px;height: 50px;background: #A61B29;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="8" style="width: 50px;height: 50px;background: #EEA2A4;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="9" style="width: 50px;height: 50px;background: #EE4866;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="10" style="width: 50px;height: 50px;background: rgb(195,176,145);border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="11" style="width: 50px;height: 50px;background: #FF9900;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="12" style="width: 50px;height: 50px;background: #804000;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="13" style="width: 50px;height: 50px;background: #FF7F50;border: #000000 solid 1px;">
+								.</div>
+							<div class="box" id="14" style="width: 50px;height: 50px;background:#A9A9A9;border: #000000 solid 1px;">
+								.</div>
+
+
+
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a id="style">风格<p id="resultOfStyle"></p></a>
+					</li>
+					<li class="mui-table-view-cell mui-collapse">
+						<a id="season">季节<p id="seasonStyle"></p></a>
+					</li>
+				</ul>
+			</div>
+			<!--图片裁剪框 start-->
+			<div style="display: none" class="tailoring-container">
+				<div class="black-cloth" onClick="closeTailor(this)"></div>
+				<div class="tailoring-content">
+					<div class="tailoring-content-one">
+						<label title="上传图片" for="chooseImg" class="l-btn choose-btn">
+							<input type="file" accept="image/jpg,image/jpeg,image/png" name="file" id="chooseImg" class="hidden" onChange="selectImg(this)">
+							选择图片
+						</label>
+						<div class="close-tailoring" onclick="closeTailor(this)">×</div>
+					</div>
+					<div class="tailoring-content-two">
+						<div class="tailoring-box-parcel">
+							<img id="tailoringImg">
+						</div>
+						<div class="preview-box-parcel">
+							<p>图片预览：</p>
+							<div class="square previewImg"></div>
+							<div class="circular previewImg"></div>
+						</div>
+					</div>
+					<div class="tailoring-content-three">
+						<button class="l-btn cropper-reset-btn">复位</button>
+						<button class="l-btn cropper-rotate-btn">旋转</button>
+						<button class="l-btn cropper-scaleX-btn">换向</button>
+						<button class="l-btn sureCut" id="sureCut">确定</button>
+					</div>
+				</div>
+			</div>
+			<!--图片裁剪框 end-->
+
+			<div class="mui-content-padded">
+				<p class="mui-text-center"><button class="mui-btn-purple" id="save">提交</button></p>
+			</div>
+		</div>
+		<script src="../../js/cropper.min.js"></script>
+		<script src="../../js/muiPicker.js"></script>
+		<script src="../../js/muiPoppicker.js"></script>
+		<script type="text/javascript">
+			//弹出菜单部分
+			mui.init();
+			mui.plusReady(function() {
+				var picker = new mui.PopPicker();
+				var index = 0;
+				var text="";
+				document.getElementById("coatPicker").addEventListener("tap", function() {
+					picker.setData([{
+						value: "yuRong",
+						text: '羽绒服'
+					}, {
+						value: "daYi",
+						text: "大衣"
+					}, {
+						value: "fengYi",
+						text: "风衣"
+					}, {
+						value: "jiaKe",
+						text: "夹克"
+					}, {
+						value: "xiZhuangWaiTao",
+						text: "西装外套"
+					}]);
+					picker.show(function(items) {
+						var result = document.getElementById("resultOfType");
+						var map = new Map();
+						var res = JSON.stringify(items[0]);
+						map = tranformOfStringToMap(res);
+						result.innerText = map.get("text");
+						text=map.get("text");
+					});
+				});
+				document.getElementById("upPicker").addEventListener("tap", function() {
+					picker.setData([{
+						value: "weiYi",
+						text: '卫衣'
+					}, {
+						value: "maoYi",
+						text: "毛衣"
+					}, {
+						value: "duanXiu",
+						text: "短袖"
+					}, {
+						value: "tXiu",
+						text: "T恤"
+					}, {
+						value: "chenShan",
+						text: "衬衫"
+					}]);
+					picker.show(function(items) {
+						var result = document.getElementById("resultOfType");
+						var map = new Map();
+						var res = JSON.stringify(items[0]);
+						map = tranformOfStringToMap(res);
+						result.innerText = map.get("text");
+						text=map.get("text");;
+					});
+				});
+				document.getElementById("downPicker").addEventListener("tap", function() {
+					picker.setData([{
+						value: "niuZaiKu",
+						text: '牛仔裤'
+					}, {
+						value: "xiuXianKu",
+						text: "休闲裤"
+					}, {
+						value: "duanKu",
+						text: "短裤"
+					}]);
+					picker.show(function(items) {
+						var result = document.getElementById("resultOfType");
+						var map = new Map();
+						var res = JSON.stringify(items[0]);
+						map = tranformOfStringToMap(res);
+						result.innerText = map.get("text");
+						text=map.get("text");
+					});
+				});
+				document.getElementById("qunPicker").addEventListener("tap", function() {
+					picker.setData([{
+						value: "lianYiQun",
+						text: '连衣裙'
+					}, {
+						value: "banShenQun",
+						text: "半身裙"
+					}]);
+					picker.show(function(items) {
+						var result = document.getElementById("resultOfType");
+						var map = new Map();
+						var res = JSON.stringify(items[0]);
+						map = tranformOfStringToMap(res);
+						result.innerText = map.get("text");
+						text=map.get("text");
+					});
+				});
+				//风格选项弹出菜单
+				document.getElementById("style").addEventListener("tap", function() {
+					picker.setData([{
+						value: "ouMei",
+						text: '欧美'
+					}, {
+						value: "riXi",
+						text: "日系"
+					}, {
+						value: "hanXi",
+						text: "韩系"
+					}, {
+						value: "fuGu",
+						text: "复古"
+					}, {
+						value: "qingShu",
+						text: "轻熟"
+					}, {
+						value: "xueYuan",
+						text: "学院"
+					}, {
+						value: "jianYue",
+						text: "简约"
+					}, {
+						value: "zhongXing",
+						text: "中性"
+					}, {
+						value: "yunDong",
+						text: "运动"
+					}, {
+						value: "hunDa",
+						text: "混搭"
+					}]);
+					picker.show(function(items) {
+						var result = document.getElementById("resultOfStyle");
+						var map = new Map();
+						var res = JSON.stringify(items[0]);
+						map = tranformOfStringToMap(res);
+						result.innerText = map.get("text");
+						text=map.get("text");
+					});
+				});
+				//季节弹出
+				document.getElementById("season").addEventListener("tap", function() {
+					picker.setData([{
+						value: "spring",
+						text: '春/秋'
+					}, {
+						value: "summer",
+						text: "夏"
+					}, {
+						value: "winter",
+						text: "冬"
+
+					}]);
+					picker.show(function(items) {
+						var result = document.getElementById("seasonStyle");
+						var map = new Map();
+						var res = JSON.stringify(items[0]);
+						map = tranformOfStringToMap(res);
+						result.innerText = map.get("text");
+						text=map.get("text");
+					});
+				});
+				//类型转换函数(String->map)
+				var tranformOfStringToMap = function(res) {
+					var map = new Map();
+					res = res.replace("{", "").replace("{", "").replace("}", "").replace("}", "");
+					var a = [];
+					a = res.split(",");
+					for (var i = 0; i < a.length; i++) {
+						var b = [];
+						b = a[i].split(":");
+						b[0] = b[0].replace("\"", "").replace("\"", "");
+						b[1] = b[1].replace("\"", "").replace("\"", "");
+						if ("text" == b[0]) {
+							map.set("text", b[1]);
+						} else if ("value" == b[0]) {
+							map.set("value", b[1])
+						}
+					}
+					return map;
+				}
+				//颜色选择
+				mui("#colorBox").on("tap", ".box", function() { //点击触发  
+					var colors = document.getElementsByClassName("box");
+					colors[index].innerHTML = "";
+					index = this.getAttribute("id");
+					var html = "<span class=\"mui-icon mui-icon-star\" style=\"color:red;font-size:50px\"></span>";
+					this.innerHTML = html;
+				});
+				//jQuery弹出框
+				(window.onresize = function() {
+					var win_height = $(window).height();
+					var win_width = $(window).width();
+					if (win_width <= 768) {
+						$(".tailoring-content").css({
+							"top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+							"left": 0
+						});
+					} else {
+						$(".tailoring-content").css({
+							"top": (win_height - $(".tailoring-content").outerHeight()) / 2,
+							"left": (win_width - $(".tailoring-content").outerWidth()) / 2
+						});
+					}
+				})();
+
+				//弹出图片裁剪框
+				$("#picture").on("click", function() {
+					$(".tailoring-container").toggle();
+				});
+
+				//cropper图片裁剪
+				$('#tailoringImg').cropper({
+					aspectRatio: 1 / 1, //默认比例
+					preview: '.previewImg', //预览视图
+					guides: false, //裁剪框的虚线(九宫格)
+					autoCropArea: 0.5, //0-1之间的数值，定义自动剪裁区域的大小，默认0.8
+					movable: false, //是否允许移动图片
+					dragCrop: true, //是否允许移除当前的剪裁框，并通过拖动来新建一个剪裁框区域
+					movable: true, //是否允许移动剪裁框
+					resizable: true, //是否允许改变裁剪框的大小
+					zoomable: false, //是否允许缩放图片大小
+					mouseWheelZoom: false, //是否允许通过鼠标滚轮来缩放图片
+					touchDragZoom: true, //是否允许通过触摸移动来缩放图片
+					rotatable: true, //是否允许旋转图片
+					crop: function(e) {
+						// 输出结果数据裁剪图像。
+					}
+				});
+				//旋转
+				$(".cropper-rotate-btn").on("click", function() {
+					$('#tailoringImg').cropper("rotate", 45);
+				});
+				//复位
+				$(".cropper-reset-btn").on("click", function() {
+					$('#tailoringImg').cropper("reset");
+				});
+				//换向
+				var flagX = true;
+				$(".cropper-scaleX-btn").on("click", function() {
+					if (flagX) {
+						$('#tailoringImg').cropper("scaleX", -1);
+						flagX = false;
+					} else {
+						$('#tailoringImg').cropper("scaleX", 1);
+						flagX = true;
+					}
+					flagX != flagX;
+				});
+				//裁剪后的处理
+				$("#sureCut").on("click", function() {
+					if ($("#tailoringImg").attr("src") == null) {
+						return false;
+					} else {
+						var cas = $('#tailoringImg').cropper('getCroppedCanvas'); //获取被裁剪后的canvas
+						var base64url = cas.toDataURL('image/png'); //转换为base64地址形式
+						$("#resultPicture").prop("src", base64url); //显示为图片的形式
+						$("#tuPian").toggle();
+						//关闭裁剪框
+						closeTailor();
+					}
+				});
+				
+				//函数提交整个页面的信息,保存图片到指定路径
+				document.getElementById("save").addEventListener("tap", function() {
+					mui.openWindow({
+							url: "fake.html",
+							id: "fake",
+							preload: true,
+							styles: {
+								top: '0px', //新页面顶部位置  
+								bottom: '60px',
+								 width:"100%",
+								 height:"100%",//新页面底部位置   
+								popGesture: 'hide'
+							},
+							show: {
+								autoShow: true //页面loaded事件发生后自动显示，默认为true  
+							}
+						});
+					
+				});
+			})
+			//关闭裁剪框
+			function closeTailor() {
+				$(".tailoring-container").toggle();
+			}
+			//图像上传
+			function selectImg(file) {
+				if (!file.files || !file.files[0]) {
+					return;
+				}
+				var reader = new FileReader();
+				reader.onload = function(evt) {
+					var replaceSrc = evt.target.result;
+					sourceSrc = evt.target.result;
+					//更换cropper的图片
+					$('#tailoringImg').cropper('replace', replaceSrc, false); //默认false，适应高度，不失真
+				}
+				reader.readAsDataURL(file.files[0]);
+			}
+
+			function convertImageToCanvas(image) {
+				var canvas = document.createElement("canvas");
+				canvas.width = image.width;
+				canvas.height = image.height;
+				canvas.getContext("2d").drawImage(image, 0, 0);
+				return canvas;
+			}
+// 			/**
+// 			 * 下载图片
+// 			 */
+			function down() {
+				var sampleImage = document.getElementById("resultPicture"),
+				canvas = convertImageToCanvas(sampleImage);
+				url = canvas.toDataURL("image/png"); //PNG格式
+				//以下代码为下载此图片功能
+				var triggerDownload = document.getElementById("tttt");
+				triggerDownload.setAttribute("href", url);
+				triggerDownload.setAttribute("download", "order-1111111111.png");
+				triggerDownload.click();
+				triggerDownload.remove();
+			}
+		</script>
+	</body>
+</html>
